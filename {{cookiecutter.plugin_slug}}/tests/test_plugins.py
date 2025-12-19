@@ -5,20 +5,20 @@ Tests for {{ cookiecutter.plugin_name }} plugin.
 import pytest
 from django.test import RequestFactory
 from fairdm import plugins
-{% if cookiecutter.register_to_models.project == "yes" %}from fairdm.core.project.models import Project
-{% endif %}{% if cookiecutter.register_to_models.dataset == "yes" %}from fairdm.core.dataset.models import Dataset
-{% endif %}{% if cookiecutter.register_to_models.sample == "yes" %}from fairdm.core.sample.models import Sample
-{% endif %}{% if cookiecutter.register_to_models.measurement == "yes" %}from fairdm.core.measurement.models import Measurement
+{% if cookiecutter.register_to_models__project == "yes" %}from fairdm.core.project.models import Project
+{% endif %}{% if cookiecutter.register_to_models__dataset == "yes" %}from fairdm.core.dataset.models import Dataset
+{% endif %}{% if cookiecutter.register_to_models__sample == "yes" %}from fairdm.core.sample.models import Sample
+{% endif %}{% if cookiecutter.register_to_models__measurement == "yes" %}from fairdm.core.measurement.models import Measurement
 {% endif %}
 from {{ cookiecutter.plugin_slug }}.plugins import {{ cookiecutter.plugin_class_name }}
 
 
 class Test{{ cookiecutter.plugin_class_name }}Registration:
     """Tests for {{ cookiecutter.plugin_class_name }} plugin registration."""
-{% if cookiecutter.register_to_models.project == "yes" or cookiecutter.register_to_models.dataset == "yes" or cookiecutter.register_to_models.sample == "yes" or cookiecutter.register_to_models.measurement == "yes" %}
+{% if cookiecutter.register_to_models__project == "yes" or cookiecutter.register_to_models__dataset == "yes" or cookiecutter.register_to_models__sample == "yes" or cookiecutter.register_to_models__measurement == "yes" %}
     @pytest.mark.parametrize(
         "model_class",
-        [{% if cookiecutter.register_to_models.project == "yes" %}Project, {% endif %}{% if cookiecutter.register_to_models.dataset == "yes" %}Dataset, {% endif %}{% if cookiecutter.register_to_models.sample == "yes" %}Sample, {% endif %}{% if cookiecutter.register_to_models.measurement == "yes" %}Measurement{% endif %}],
+        [{% if cookiecutter.register_to_models__project == "yes" %}Project, {% endif %}{% if cookiecutter.register_to_models__dataset == "yes" %}Dataset, {% endif %}{% if cookiecutter.register_to_models__sample == "yes" %}Sample, {% endif %}{% if cookiecutter.register_to_models__measurement == "yes" %}Measurement{% endif %}],
     )
     @pytest.mark.django_db
     def test_plugin_registered_to_models(self, model_class):
@@ -29,7 +29,7 @@ class Test{{ cookiecutter.plugin_class_name }}Registration:
 
     @pytest.mark.parametrize(
         "model_class",
-        [{% if cookiecutter.register_to_models.project == "yes" %}Project, {% endif %}{% if cookiecutter.register_to_models.dataset == "yes" %}Dataset, {% endif %}{% if cookiecutter.register_to_models.sample == "yes" %}Sample, {% endif %}{% if cookiecutter.register_to_models.measurement == "yes" %}Measurement{% endif %}],
+        [{% if cookiecutter.register_to_models__project == "yes" %}Project, {% endif %}{% if cookiecutter.register_to_models__dataset == "yes" %}Dataset, {% endif %}{% if cookiecutter.register_to_models__sample == "yes" %}Sample, {% endif %}{% if cookiecutter.register_to_models__measurement == "yes" %}Measurement{% endif %}],
     )
     @pytest.mark.django_db
     def test_plugin_registered_only_once(self, model_class):
@@ -60,7 +60,7 @@ class Test{{ cookiecutter.plugin_class_name }}Attributes:
 
 class Test{{ cookiecutter.plugin_class_name }}View:
     """Tests for {{ cookiecutter.plugin_class_name }} view functionality."""
-{% if cookiecutter.register_to_models.project == "yes" %}
+{% if cookiecutter.register_to_models__project == "yes" %}
     @pytest.mark.django_db
     def test_plugin_view_with_project(self, rf, user, project):
         """Test that the plugin view works with a Project instance."""
@@ -74,7 +74,7 @@ class Test{{ cookiecutter.plugin_class_name }}View:
         context = view.get_context_data()
         assert "base_object" in context
         assert context["base_object"] == project
-{% endif %}{% if cookiecutter.register_to_models.dataset == "yes" %}
+{% endif %}{% if cookiecutter.register_to_models__dataset == "yes" %}
     @pytest.mark.django_db
     def test_plugin_view_with_dataset(self, rf, user, dataset):
         """Test that the plugin view works with a Dataset instance."""

@@ -1,22 +1,22 @@
 from django.utils.translation import gettext_lazy as _
 from django.views.generic.base import TemplateView
 from fairdm import plugins
-{% if cookiecutter.register_to_models.project == "yes" %}from fairdm.core.project.models import Project
-{% endif %}{% if cookiecutter.register_to_models.dataset == "yes" %}from fairdm.core.dataset.models import Dataset
-{% endif %}{% if cookiecutter.register_to_models.sample == "yes" %}from fairdm.core.sample.models import Sample
-{% endif %}{% if cookiecutter.register_to_models.measurement == "yes" %}from fairdm.core.measurement.models import Measurement
+{% if cookiecutter.register_to_models__project == "yes" %}from fairdm.core.project.models import Project
+{% endif %}{% if cookiecutter.register_to_models__dataset == "yes" %}from fairdm.core.dataset.models import Dataset
+{% endif %}{% if cookiecutter.register_to_models__sample == "yes" %}from fairdm.core.sample.models import Sample
+{% endif %}{% if cookiecutter.register_to_models__measurement == "yes" %}from fairdm.core.measurement.models import Measurement
 {% endif %}
 
-@plugins.register({% if cookiecutter.register_to_models.project == "yes" %}Project{% endif %}{% if cookiecutter.register_to_models.dataset == "yes" %}{% if cookiecutter.register_to_models.project == "yes" %}, {% endif %}Dataset{% endif %}{% if cookiecutter.register_to_models.sample == "yes" %}{% if cookiecutter.register_to_models.project == "yes" or cookiecutter.register_to_models.dataset == "yes" %}, {% endif %}Sample{% endif %}{% if cookiecutter.register_to_models.measurement == "yes" %}{% if cookiecutter.register_to_models.project == "yes" or cookiecutter.register_to_models.dataset == "yes" or cookiecutter.register_to_models.sample == "yes" %}, {% endif %}Measurement{% endif %})
+@plugins.register({% if cookiecutter.register_to_models__project == "yes" %}Project{% endif %}{% if cookiecutter.register_to_models__dataset == "yes" %}{% if cookiecutter.register_to_models__project == "yes" %}, {% endif %}Dataset{% endif %}{% if cookiecutter.register_to_models__sample == "yes" %}{% if cookiecutter.register_to_models__project == "yes" or cookiecutter.register_to_models__dataset == "yes" %}, {% endif %}Sample{% endif %}{% if cookiecutter.register_to_models__measurement == "yes" %}{% if cookiecutter.register_to_models__project == "yes" or cookiecutter.register_to_models__dataset == "yes" or cookiecutter.register_to_models__sample == "yes" %}, {% endif %}Measurement{% endif %})
 class {{ cookiecutter.plugin_class_name }}(plugins.FairDMPlugin, TemplateView):
     """
     {{ cookiecutter.plugin_short_description }}
     
     This plugin is registered to the following models:
-    {% if cookiecutter.register_to_models.project == "yes" %}- Project
-    {% endif %}{% if cookiecutter.register_to_models.dataset == "yes" %}- Dataset
-    {% endif %}{% if cookiecutter.register_to_models.sample == "yes" %}- Sample
-    {% endif %}{% if cookiecutter.register_to_models.measurement == "yes" %}- Measurement
+    {% if cookiecutter.register_to_models__project == "yes" %}- Project
+    {% endif %}{% if cookiecutter.register_to_models__dataset == "yes" %}- Dataset
+    {% endif %}{% if cookiecutter.register_to_models__sample == "yes" %}- Sample
+    {% endif %}{% if cookiecutter.register_to_models__measurement == "yes" %}- Measurement
     {% endif %}
     """
 

@@ -7,7 +7,7 @@ This plugin is designed for use with the [FairDM framework](https://www.fairdm.o
 
 ## Features
 
-- ✨ Seamless integration with FairDM core models{% if cookiecutter.register_to_models.project == "yes" %} (Project{% endif %}{% if cookiecutter.register_to_models.dataset == "yes" %}, Dataset{% endif %}{% if cookiecutter.register_to_models.sample == "yes" %}, Sample{% endif %}{% if cookiecutter.register_to_models.measurement == "yes" %}, Measurement{% endif %})
+- ✨ Seamless integration with FairDM core models{% if cookiecutter.register_to_models__project == "yes" %} (Project{% endif %}{% if cookiecutter.register_to_models__dataset == "yes" %}, Dataset{% endif %}{% if cookiecutter.register_to_models__sample == "yes" %}, Sample{% endif %}{% if cookiecutter.register_to_models__measurement == "yes" %}, Measurement{% endif %})
 - 🎨 Bootstrap 5 compatible UI
 - 🔌 Uses existing FairDM components for UI consistency
 - 🧪 Comprehensive test suite

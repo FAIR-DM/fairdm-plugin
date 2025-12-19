@@ -72,14 +72,14 @@ You'll be asked to provide:
 
 #### Model Registration Options
 
-The `register_to_models` option lets you choose which FairDM models your plugin will work with:
+You'll be prompted for each FairDM model to decide where your plugin appears:
 
-- **project**: Register to Project model
-- **dataset**: Register to Dataset model  
-- **sample**: Register to Sample model
-- **measurement**: Register to Measurement model
+- **register_to_models__project**: Show plugin on Project detail pages?
+- **register_to_models__dataset**: Show plugin on Dataset detail pages?
+- **register_to_models__sample**: Show plugin on Sample detail pages?
+- **register_to_models__measurement**: Show plugin on Measurement detail pages?
 
-Set each to "yes" or "no" during the prompts.
+Choose "yes" or "no" for each. Select at least one model for your plugin to be useful.
 
 ## What Gets Generated
 
@@ -256,10 +256,10 @@ github_username: johnsmith
 version: 0.1.0
 python_version: 3.11
 license: MIT
-register_to_models.project: no
-register_to_models.dataset: yes
-register_to_models.sample: no
-register_to_models.measurement: no
+register_to_models__project: no
+register_to_models__dataset: yes
+register_to_models__sample: no
+register_to_models__measurement: no
 plugin_category: EXPLORE
 icon_name: chart-line
 ```
@@ -277,10 +277,10 @@ github_username: janedoe
 version: 0.1.0
 python_version: 3.11
 license: BSD-3-Clause
-register_to_models.project: yes
-register_to_models.dataset: yes
-register_to_models.sample: yes
-register_to_models.measurement: yes
+register_to_models__project: yes
+register_to_models__dataset: yes
+register_to_models__sample: yes
+register_to_models__measurement: yes
 plugin_category: ACTIONS
 icon_name: download
 ```

@@ -85,7 +85,7 @@ When adding to `cookiecutter.json`:
 Use conditionals for optional features:
 
 ```python
-{% if cookiecutter.register_to_models.project == "yes" %}
+{% if cookiecutter.register_to_models__project == "yes" %}
 from fairdm.core.project.models import Project
 {% endif %}
 ```

@@ -29,25 +29,33 @@ author_email [your.email@example.com]: john@example.com
 github_username [yourusername]: johnsmith
 version [0.1.0]: 
 python_version [3.11]: 
-license [MIT]: 
-register_to_models.project [yes]: no
-register_to_models.dataset [yes]: yes
-register_to_models.sample [yes]: no
-register_to_models.measurement [yes]: no
+Select license:
+1 - MIT
+2 - BSD-3-Clause
+3 - Apache-2.0
+Choose from 1, 2, 3 [1]: 1
+Select register_to_models__project:
+1 - yes
+2 - no
+Choose from 1, 2 [1]: 2
+Select register_to_models__dataset:
+1 - yes
+2 - no
+Choose from 1, 2 [1]: 1
+Select register_to_models__sample:
+1 - yes
+2 - no
+Choose from 1, 2 [1]: 2
+Select register_to_models__measurement:
+1 - yes
+2 - no
+Choose from 1, 2 [1]: 2
 Select plugin_category:
 1 - EXPLORE
 2 - ACTIONS
 3 - MANAGEMENT
 Choose from 1, 2, 3 [1]: 1
 icon_name [puzzle-piece]: chart-line
-Select include_settings:
-1 - yes
-2 - no
-Choose from 1, 2 [1]: 1
-Select include_api:
-1 - yes
-2 - no
-Choose from 1, 2 [1]: 2
 ```
 
 ## After Generation

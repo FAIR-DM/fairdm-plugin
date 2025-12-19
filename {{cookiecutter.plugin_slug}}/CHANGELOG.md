@@ -9,10 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Initial plugin structure
-- Basic plugin functionality{% if cookiecutter.register_to_models.project == "yes" %}
-- Support for Project model{% endif %}{% if cookiecutter.register_to_models.dataset == "yes" %}
-- Support for Dataset model{% endif %}{% if cookiecutter.register_to_models.sample == "yes" %}
-- Support for Sample model{% endif %}{% if cookiecutter.register_to_models.measurement == "yes" %}
+- Basic plugin functionality{% if cookiecutter.register_to_models__project == "yes" %}
+- Support for Project model{% endif %}{% if cookiecutter.register_to_models__dataset == "yes" %}
+- Support for Dataset model{% endif %}{% if cookiecutter.register_to_models__sample == "yes" %}
+- Support for Sample model{% endif %}{% if cookiecutter.register_to_models__measurement == "yes" %}
 - Support for Measurement model{% endif %}
 - Comprehensive test suite
 - Documentation
