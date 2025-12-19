@@ -9,8 +9,7 @@ This plugin is designed for use with the [FairDM framework](https://www.fairdm.o
 
 - ✨ Seamless integration with FairDM core models{% if cookiecutter.register_to_models.project == "yes" %} (Project{% endif %}{% if cookiecutter.register_to_models.dataset == "yes" %}, Dataset{% endif %}{% if cookiecutter.register_to_models.sample == "yes" %}, Sample{% endif %}{% if cookiecutter.register_to_models.measurement == "yes" %}, Measurement{% endif %})
 - 🎨 Bootstrap 5 compatible UI
-- 🔌 Uses existing FairDM components for UI consistency{% if cookiecutter.use_waffle == "yes" %}
-- 🚦 Feature flag control via Django Waffle{% endif %}
+- 🔌 Uses existing FairDM components for UI consistency
 - 🧪 Comprehensive test suite
 - 💻 VSCode workspace configuration with recommended extensions
 - 📖 Well-documented and maintainable code
@@ -28,33 +27,18 @@ import fairdm
 
 fairdm.setup(addons=["{{ cookiecutter.plugin_slug }}"])
 ```
-{% if cookiecutter.use_waffle == "yes" %}
-### Enable the Plugin
 
-This plugin uses a waffle switch to control whether it's enabled. Create the switch in Django admin or using a management command:
-
-```python
-from waffle.models import Switch
-
-Switch.objects.create(
-    name="enable_{{ cookiecutter.plugin_slug }}",
-    active=True
-)
-```
-{% endif %}
 That's it! The {{ cookiecutter.plugin_name }} plugin is now installed and ready to use.
 
 ## Configuration
-{% if cookiecutter.include_settings == "yes" %}
-The following settings are provided by default. You can override these in your `config/settings.py`:
+
+You can customize plugin behavior by overriding settings in your `config/settings.py`:
 
 ```python
 # {{ cookiecutter.plugin_slug.upper() }} Settings
-# Add your settings here
+# See {{ cookiecutter.plugin_slug }}/settings.py for available options
 ```
-{% else %}
-This plugin doesn't require any additional configuration. It works out of the box!
-{% endif %}
+
 ## Usage
 
 Once installed, the plugin will appear in the plugin menu on applicable detail views. {% if cookiecutter.plugin_category == "EXPLORE" %}It appears in the **Explore** section of the plugin menu.{% elif cookiecutter.plugin_category == "ACTIONS" %}It appears in the **Actions** section of the plugin menu.{% elif cookiecutter.plugin_category == "MANAGEMENT" %}It appears in the **Management** section of the plugin menu.{% endif %}
@@ -113,9 +97,7 @@ poetry run mypy {{ cookiecutter.plugin_slug }}
 │   ├── __init__.py
 │   ├── apps.py                    # Django app configuration
 │   ├── plugins.py                 # Plugin registration and views
-│   {% if cookiecutter.include_settings == "yes" -%}
 │   ├── settings.py                # Default settings
-│   {% endif -%}
 │   └── templates/
 │       └── {{ cookiecutter.plugin_slug }}/
 │           └── {{ cookiecutter.plugin_slug }}.html  # Main plugin template

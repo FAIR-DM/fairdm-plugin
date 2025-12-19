@@ -8,8 +8,8 @@
   "github_username": "yourusername",
   "version": "0.1.0",
   "python_version": "3.11",
-  "license": ["MIT", "BSD-3-Clause", "Apache-2.0", "GPL-3.0"],
-  "use_waffle": ["yes", "no"],
+  "license": "MIT",
+  "__license_info": "MIT License - most permissive, allows commercial use, no copyleft",
   "register_to_models": {
     "project": "yes",
     "dataset": "yes",
@@ -18,7 +18,6 @@
   },
   "plugin_category": ["EXPLORE", "ACTIONS", "MANAGEMENT"],
   "icon_name": "puzzle-piece",
-  "include_settings": ["yes", "no"],
-  "include_api": ["yes", "no"],
+  "__icon_info": "django-easy-icons alias (e.g., view, edit, delete, chart, table, cog, puzzle-piece)",
   "year": "{% now 'utc', '%Y' %}"
 }

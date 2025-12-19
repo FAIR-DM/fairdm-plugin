@@ -21,15 +21,12 @@ def default_context():
         "version": "0.1.0",
         "python_version": "3.11",
         "license": "MIT",
-        "use_waffle": "no",
         "register_to_models.project": "yes",
         "register_to_models.dataset": "yes",
         "register_to_models.sample": "no",
         "register_to_models.measurement": "no",
         "plugin_category": "EXPLORE",
         "icon_name": "puzzle-piece",
-        "include_settings": "no",
-        "include_api": "no",
     }
 
 
@@ -47,7 +44,6 @@ def minimal_context():
         "version": "0.1.0",
         "python_version": "3.11",
         "license": "MIT",
-        "use_waffle": "no",
         "register_to_models": {
             "project": "yes",
             "dataset": "no",
@@ -56,8 +52,6 @@ def minimal_context():
         },
         "plugin_category": "ACTIONS",
         "icon_name": "cog",
-        "include_settings": "no",
-        "include_api": "no",
     }
 
 
@@ -74,8 +68,7 @@ def full_features_context():
         "github_username": "testuser",
         "version": "0.1.0",
         "python_version": "3.11",
-        "license": "BSD-3-Clause",
-        "use_waffle": "yes",
+        "license": "MIT",
         "register_to_models": {
             "project": "yes",
             "dataset": "yes",
@@ -84,8 +77,6 @@ def full_features_context():
         },
         "plugin_category": "MANAGEMENT",
         "icon_name": "shield",
-        "include_settings": "yes",
-        "include_api": "yes",
     }
 
 

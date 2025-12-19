@@ -85,8 +85,8 @@ When adding to `cookiecutter.json`:
 Use conditionals for optional features:
 
 ```python
-{% if cookiecutter.use_waffle == "yes" %}
-import waffle
+{% if cookiecutter.register_to_models.project == "yes" %}
+from fairdm.core.project.models import Project
 {% endif %}
 ```
 
@@ -97,7 +97,6 @@ Test the generated project with:
 - [ ] All models selected
 - [ ] Single model selected
 - [ ] No models selected (should fail gracefully or warn)
-- [ ] Waffle enabled and disabled
 - [ ] Template tags enabled and disabled
 - [ ] All license types
 - [ ] All plugin categories

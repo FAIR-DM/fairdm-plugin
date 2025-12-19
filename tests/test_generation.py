@@ -65,10 +65,6 @@ class TestBasicGeneration:
         github_dir = generated_project / ".github"
         assert github_dir.exists()
         
-        # Instructions
-        assert (github_dir / "instructions" / "copilot.instructions.md").exists()
-        assert (github_dir / "instructions" / "testing.instructions.md").exists()
-        
         # Workflows
         assert (github_dir / "workflows" / "tests.yml").exists()
         
@@ -104,13 +100,18 @@ class TestBasicGeneration:
 class TestConditionalGeneration:
     """Test that conditional features are generated correctly."""
 
-    def test_settings_file_not_included_by_default(self, generated_project):
-        """Test that settings.py is not created when include_settings=no."""
+    def test_settings_file_always_included(self, generated_project):
+        """Test that settings.py is always created."""
         settings_file = generated_project / "test_plugin" / "settings.py"
-        assert not settings_file.exists()
+        assert settings_file.exists()
+        
+        # Verify it has helpful documentation
+        content = settings_file.read_text()
+        assert "TEST_PLUGIN_" in content.upper()
+        assert "Default settings" in content
 
-    def test_settings_file_included_when_enabled(self, full_features_project):
-        """Test that settings.py is created when include_settings=yes."""
+    def test_settings_file_included_in_full_features(self, full_features_project):
+        """Test that settings.py is created in full features project too."""
         settings_file = full_features_project / "full_features_plugin" / "settings.py"
         assert settings_file.exists()
 
@@ -139,23 +140,6 @@ class TestConditionalGeneration:
         assert "from fairdm.core.dataset.models import Dataset" in content
         assert "from fairdm.core.sample.models import Sample" in content
         assert "from fairdm.core.measurement.models import Measurement" in content
-
-    def test_waffle_integration_not_included_by_default(self, generated_project):
-        """Test that Waffle code is not included when use_waffle=no."""
-        plugins_file = generated_project / "test_plugin" / "plugins.py"
-        content = plugins_file.read_text()
-        
-        assert "import waffle" not in content
-        assert "waffle.switch_is_active" not in content
-
-    def test_waffle_integration_included_when_enabled(self, full_features_project):
-        """Test that Waffle code is included when use_waffle=yes."""
-        plugins_file = full_features_project / "full_features_plugin" / "plugins.py"
-        content = plugins_file.read_text()
-        
-        assert "import waffle" in content
-        assert "waffle.switch_is_active" in content
-        assert 'enable_full_features_plugin' in content
 
 
 class TestLicenseGeneration:

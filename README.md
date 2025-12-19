@@ -66,12 +66,9 @@ You'll be asked to provide:
 | `version` | Initial version number | "0.1.0" |
 | `python_version` | Python version to target | "3.11" |
 | `license` | Choose from MIT, BSD-3-Clause, Apache-2.0, GPL-3.0 | "MIT" |
-| `use_waffle` | Enable Waffle feature flags? | "yes" or "no" |
 | `register_to_models` | Which FairDM models to register to | See below |
 | `plugin_category` | Where to show in plugin menu | EXPLORE, ACTIONS, or MANAGEMENT |
-| `icon_name` | FontAwesome icon name | "puzzle-piece" |
-| `include_settings` | Include settings.py file? | "yes" or "no" |
-| `include_api` | Include DRF API endpoints? | "yes" or "no" |
+| `icon_name` | django-easy-icons alias | "puzzle-piece" |
 
 #### Model Registration Options
 
@@ -259,15 +256,12 @@ github_username: johnsmith
 version: 0.1.0
 python_version: 3.11
 license: MIT
-use_waffle: no
 register_to_models.project: no
 register_to_models.dataset: yes
 register_to_models.sample: no
 register_to_models.measurement: no
 plugin_category: EXPLORE
 icon_name: chart-line
-include_settings: yes
-include_api: no
 ```
 
 ### Example 2: Management Action Plugin
@@ -283,15 +277,12 @@ github_username: janedoe
 version: 0.1.0
 python_version: 3.11
 license: BSD-3-Clause
-use_waffle: yes
 register_to_models.project: yes
 register_to_models.dataset: yes
 register_to_models.sample: yes
 register_to_models.measurement: yes
 plugin_category: ACTIONS
 icon_name: download
-include_settings: no
-include_api: yes
 ```
 
 ## Architecture Notes

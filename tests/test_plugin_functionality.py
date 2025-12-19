@@ -114,26 +114,6 @@ class TestPluginRegistration:
         assert "from fairdm.core.measurement.models import Measurement" not in content
 
 
-class TestWaffleIntegration:
-    """Test Waffle feature flag integration."""
-
-    def test_waffle_dispatch_method(self, full_features_project):
-        """Test that dispatch method checks waffle switch when enabled."""
-        plugins_file = full_features_project / "full_features_plugin" / "plugins.py"
-        content = plugins_file.read_text()
-        
-        assert "def dispatch(self, request, *args, **kwargs):" in content
-        assert "waffle.switch_is_active" in content
-        assert "PermissionDenied" in content
-
-    def test_waffle_switch_name_matches_plugin(self, full_features_project):
-        """Test that waffle switch name matches plugin slug."""
-        plugins_file = full_features_project / "full_features_plugin" / "plugins.py"
-        content = plugins_file.read_text()
-        
-        assert 'enable_full_features_plugin' in content
-
-
 class TestAppConfig:
     """Test Django app configuration."""
 

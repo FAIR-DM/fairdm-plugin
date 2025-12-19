@@ -83,10 +83,7 @@ jobs:
         run: |
           cookiecutter . --no-input \
             plugin_name="Test CI Plugin" \
-            plugin_slug="test_ci_plugin" \
-            use_waffle="yes" \
-            include_settings="yes" \
-            include_api="yes"
+            plugin_slug="test_ci_plugin"
 
       - name: Verify generated structure
         run: |
