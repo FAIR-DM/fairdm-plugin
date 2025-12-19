@@ -1,0 +1,65 @@
+name: Tests
+
+on:
+  push:
+    branches: [ main, development ]
+  pull_request:
+    branches: [ main, development ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        python-version: ['3.11', '3.12']
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python {% raw %}${{ matrix.python-version }}{% endraw %}
+      uses: actions/setup-python@v5
+      with:
+        python-version: {% raw %}${{ matrix.python-version }}{% endraw %}
+    
+    - name: Install Poetry
+      run: |
+        curl -sSL https://install.python-poetry.org | python3 -
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
+    
+    - name: Configure Poetry
+      run: |
+        poetry config virtualenvs.create true
+        poetry config virtualenvs.in-project true
+    
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: .venv
+        key: {% raw %}venv-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('**/poetry.lock') }}{% endraw %}
+        restore-keys: |
+          {% raw %}venv-${{ runner.os }}-${{ matrix.python-version }}-{% endraw %}
+    
+    - name: Install dependencies
+      run: poetry install --no-interaction
+    
+    - name: Run linting
+      run: |
+        poetry run ruff check .
+    
+    - name: Run type checking
+      run: |
+        poetry run mypy {{ cookiecutter.plugin_slug }}
+      continue-on-error: true
+    
+    - name: Run tests with coverage
+      run: |
+        poetry run pytest --cov={{ cookiecutter.plugin_slug }} --cov-report=xml --cov-report=term
+    
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v4
+      with:
+        file: ./coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+        fail_ci_if_error: false

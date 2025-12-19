@@ -1,0 +1,115 @@
+name: Test Cookiecutter Template
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Test Template Generation
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12"]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          version: latest
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+
+      - name: Load cached venv
+        id: cached-poetry-dependencies
+        uses: actions/cache@v4
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('**/poetry.lock') }}
+
+      - name: Install dependencies
+        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+        run: poetry install --no-interaction --no-root
+
+      - name: Install project
+        run: poetry install --no-interaction
+
+      - name: Run linting
+        run: poetry run ruff check .
+
+      - name: Run type checking
+        run: poetry run mypy tests/
+        continue-on-error: true
+
+      - name: Run tests
+        run: poetry run pytest -v --cov --cov-report=xml
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          file: ./coverage.xml
+          fail_ci_if_error: false
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+  test-generation:
+    name: Test Generated Plugin
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Cookiecutter
+        run: pip install cookiecutter
+
+      - name: Generate test plugin
+        run: |
+          cookiecutter . --no-input \
+            plugin_name="Test CI Plugin" \
+            plugin_slug="test_ci_plugin" \
+            use_waffle="yes" \
+            include_settings="yes" \
+            include_api="yes"
+
+      - name: Verify generated structure
+        run: |
+          cd test_ci_plugin
+          ls -la
+          ls -la test_ci_plugin/
+          test -f pyproject.toml
+          test -f test_ci_plugin.code-workspace
+          test -f test_ci_plugin/plugins.py
+          test -f test_ci_plugin/templates/test_ci_plugin/test_ci_plugin.html
+          test ! -f test_ci_plugin/urls.py
+          test ! -d test_ci_plugin/templatetags
+          test ! -d test_ci_plugin/templates/cotton
+
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+
+      - name: Install generated plugin dependencies
+        run: |
+          cd test_ci_plugin
+          poetry install --no-interaction
+
+      - name: Run generated plugin tests
+        run: |
+          cd test_ci_plugin
+          poetry run pytest -v

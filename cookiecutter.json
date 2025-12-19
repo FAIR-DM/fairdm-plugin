@@ -1,0 +1,24 @@
+{
+  "plugin_name": "My FairDM Plugin",
+  "plugin_slug": "{{ cookiecutter.plugin_name.lower().replace(' ', '_').replace('-', '_') }}",
+  "plugin_short_description": "A brief description of what this plugin does",
+  "plugin_class_name": "{{ cookiecutter.plugin_name.replace(' ', '').replace('-', '') }}",
+  "author_name": "Your Name",
+  "author_email": "your.email@example.com",
+  "github_username": "yourusername",
+  "version": "0.1.0",
+  "python_version": "3.11",
+  "license": ["MIT", "BSD-3-Clause", "Apache-2.0", "GPL-3.0"],
+  "use_waffle": ["yes", "no"],
+  "register_to_models": {
+    "project": "yes",
+    "dataset": "yes",
+    "sample": "yes",
+    "measurement": "yes"
+  },
+  "plugin_category": ["EXPLORE", "ACTIONS", "MANAGEMENT"],
+  "icon_name": "puzzle-piece",
+  "include_settings": ["yes", "no"],
+  "include_api": ["yes", "no"],
+  "year": "{% now 'utc', '%Y' %}"
+}

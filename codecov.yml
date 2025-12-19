@@ -1,0 +1,20 @@
+# Cookiecutter Template Test Coverage
+
+coverage:
+  status:
+    project:
+      default:
+        target: 80%
+        threshold: 5%
+    patch:
+      default:
+        target: 80%
+
+ignore:
+  - "tests/**"
+  - "{{cookiecutter.plugin_slug}}/**"  # Don't measure template files
+
+comment:
+  layout: "header, diff, flags, files"
+  behavior: default
+  require_changes: false
