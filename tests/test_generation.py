@@ -145,7 +145,7 @@ class TestConditionalGeneration:
 class TestLicenseGeneration:
     """Test that different license files are generated correctly."""
 
-    @pytest.mark.parametrize("license_type", ["MIT", "BSD-3-Clause", "Apache-2.0"])
+    @pytest.mark.parametrize("license_type", ["MIT", "BSD-3-Clause", "Apache-2.0", "GPL-3.0"])
     def test_license_file_created(self, tmp_path, template_dir, default_context, license_type):
         """Test that license file is created for each license type."""
         context = default_context.copy()
